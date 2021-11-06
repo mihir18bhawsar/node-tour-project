@@ -15,7 +15,7 @@ const userRouter = require('./routes/userRoutes');
 const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
-
+//creating app
 const app = express();
 
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
