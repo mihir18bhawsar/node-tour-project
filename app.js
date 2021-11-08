@@ -8,6 +8,7 @@ const xss = require('xss-clean');
 const hpp = require('hpp');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
+const cors = require('cors');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -18,6 +19,8 @@ const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 //creating app
 const app = express();
+app.use(cors());
+app.options('*', cors());
 app.enable('trust proxy');
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.set('view engine', 'pug');
