@@ -19,12 +19,12 @@ const bookingRouter = require('./routes/bookingRoutes');
 const viewRouter = require('./routes/viewRoutes');
 //creating app
 const app = express();
-app.use(cors());
-app.options('*', cors());
 app.enable('trust proxy');
 app.use(express.urlencoded({ extended: true, limit: '10kb' }));
 app.set('view engine', 'pug');
 app.set('views', path.join(__dirname, 'views'));
+app.use(cors());
+app.options('*', cors());
 app.use(express.static(path.join(__dirname, 'public')));
 // 1) MIDDLEWARES
 if (process.env.NODE_ENV === 'development') {
