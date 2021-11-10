@@ -85,8 +85,3 @@ exports.submitUserData = catchAsync(async (req, res) => {
     user: updatedUser
   });
 });
-
-exports.updateHeader = (req, res, next) => {
-  console.log(req.headers);
-  next();
-};

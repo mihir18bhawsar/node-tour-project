@@ -10,6 +10,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const compression = require('compression');
 const cors = require('cors');
+const csp = require('helmet-csp');
 
 const AppError = require('./utils/appError');
 const globalErrorHandler = require('./controllers/errorController');
@@ -19,7 +20,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
-const viewsController = require('./controllers/viewsController');
+
 //creating app
 const app = express();
 app.enable('trust proxy');
@@ -34,7 +35,21 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 app.use(helmet());
-
+app.use(
+  csp({
+    useDefaults: true,
+    directives: {
+      defaultSrc: ["'self'", 'https://js.stripe.com', 'https://*.mapbox.com'],
+      scriptSrc: [
+        "'self'",
+        'https://js.stripe.com',
+        'https://cdnjs.cloudflare.com',
+        'https://api.mapbox.com'
+      ]
+    },
+    reportOnly: false
+  })
+);
 const limiter = rateLimit({
   max: 100,
   windowMs: 60 * 60 * 1000,
@@ -54,7 +69,7 @@ app.use(cookieParser());
 
 app.use(mongoSanitize());
 app.use(xss());
-app.use(viewsController.updateHeader);
+
 app.use(
   hpp({
     whitelist: [
