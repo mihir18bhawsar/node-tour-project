@@ -6,9 +6,11 @@ import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
 import { showAlert } from './alerts';
+import { signup } from './signup';
 //get locations not from database or api query but using the data that was brought to pug file by passing in data attribute
 const mapbox = document.getElementById('map');
 const loginForm = document.querySelector('.formL');
+const signupForm = document.querySelector('.formS');
 const logoutbutton = document.querySelector('.nav__el--logout');
 const dataUpdateForm = document.querySelector('.form-user-data');
 const passwordUpdateForm = document.querySelector('.form-user-password');
@@ -25,6 +27,16 @@ if (loginForm) {
     const email = document.getElementById('email').value;
     const password = document.getElementById('password').value;
     login(email, password);
+  });
+}
+if (signupForm) {
+  signupForm.addEventListener('submit', e => {
+    e.preventDefault();
+    const name = document.getElementById('name').value;
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+    const cnfpassword = document.getElementById('cnfpassword').value;
+    signup(name, email, password, cnfpassword);
   });
 }
 if (dataUpdateForm) {

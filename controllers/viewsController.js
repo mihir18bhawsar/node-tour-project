@@ -12,16 +12,10 @@ exports.alerts = (req, res, next) => {
 
 exports.getOverview = catchAsync(async (req, res) => {
   const tours = await Tour.find();
-  res
-    .status(200)
-    // .set(
-    //   'Content-Security-Policy',
-    //   "default-src 'self' http://localhost:8000 https://js.stripe.com/v3/ ;base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src https://cdnjs.cloudflare.com http://localhost:8000 https://js.stripe.com/v3/ https://api.mapbox.com 'self' blob: ;script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests;"
-    // )
-    .render('overview', {
-      title: 'All Tours',
-      tours
-    });
+  res.status(200).render('overview', {
+    title: 'All Tours',
+    tours
+  });
 });
 
 exports.getTour = catchAsync(async (req, res, next) => {
@@ -30,28 +24,22 @@ exports.getTour = catchAsync(async (req, res, next) => {
     select: 'review rating user'
   });
   if (!tour) next(new AppError('No Tour With This Name', 404));
-  res
-    .status(200)
-    // .set(
-    //   'Content-Security-Policy',
-    //   "default-src 'self' https://*.mapbox.com https://js.stripe.com/v3/ ;base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src https://cdnjs.cloudflare.com https://api.mapbox.com https://js.stripe.com/v3/ 'self' blob: ;script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests;"
-    // )
-    .render('tour', {
-      title: `${tour.name} Tour`,
-      tour
-    });
+  res.status(200).render('tour', {
+    title: `${tour.name} Tour`,
+    tour
+  });
 });
 
 exports.getLoginForm = catchAsync(async (req, res) => {
-  res
-    .status(200)
-    // .set(
-    //   'Content-Security-Policy',
-    //   "default-src 'self' http://localhost:8000 https://js.stripe.com/v3/ ;base-uri 'self';block-all-mixed-content;font-src 'self' https: data:;frame-ancestors 'self';img-src 'self' data:;object-src 'none';script-src https://cdnjs.cloudflare.com http://localhost:8000 https://api.mapbox.com https://js.stripe.com/v3/ 'self' blob: ;script-src-attr 'none';style-src 'self' https: 'unsafe-inline';upgrade-insecure-requests;"
-    // )
-    .render('login', {
-      title: 'Log into your account'
-    });
+  res.status(200).render('login', {
+    title: 'Log into your account'
+  });
+});
+
+exports.getSignupForm = catchAsync(async (req, res) => {
+  res.status(200).render('signup', {
+    title: 'SignUp account'
+  });
 });
 
 exports.getAccount = (req, res) => {
