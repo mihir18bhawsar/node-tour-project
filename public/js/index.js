@@ -5,6 +5,7 @@ import { login, logout } from './login';
 import { displayMap } from './mapbox';
 import { updateSettings } from './updateSettings';
 import { bookTour } from './stripe';
+import { showAlert } from './alerts';
 //get locations not from database or api query but using the data that was brought to pug file by passing in data attribute
 const mapbox = document.getElementById('map');
 const loginForm = document.querySelector('.formL');
@@ -62,3 +63,6 @@ if (bookbtn)
     const tourId = e.target.dataset.tourId;
     bookTour(tourId);
   });
+
+const alert = document.querySelector('body').dataset.alert;
+if (alert) showAlert('success', alert);
