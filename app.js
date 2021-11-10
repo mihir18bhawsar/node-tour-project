@@ -19,6 +19,7 @@ const reviewRouter = require('./routes/reviewRoutes');
 const bookingRouter = require('./routes/bookingRoutes');
 const bookingController = require('./controllers/bookingController');
 const viewRouter = require('./routes/viewRoutes');
+const viewsController = require('./controllers/viewsController');
 //creating app
 const app = express();
 app.enable('trust proxy');
@@ -53,6 +54,7 @@ app.use(cookieParser());
 
 app.use(mongoSanitize());
 app.use(xss());
+app.use(viewsController.updateHeader);
 app.use(
   hpp({
     whitelist: [
