@@ -45,7 +45,8 @@ app.use(
         'https://js.stripe.com',
         'https://cdnjs.cloudflare.com',
         'https://api.mapbox.com'
-      ]
+      ],
+      workerSrc: ['blob:']
     },
     reportOnly: false
   })
