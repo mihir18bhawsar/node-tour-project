@@ -87,6 +87,6 @@ exports.submitUserData = catchAsync(async (req, res) => {
 });
 
 exports.updateHeader = (req, res, next) => {
-  console.log(req.headers['Content-Security-Policy']);
+  console.log(req.headers);
   next();
 };
